@@ -41,6 +41,7 @@ import { BsCashStack } from 'react-icons/bs';
 import IconAt from '../Icon/IconAt';
 import IconAward from '../Icon/IconAward';
 import { ROLES } from '../../constants/roles'
+import logo from '../../../public/s&S.png'
 
 const Sidebar = () => {
     const [currentMenu, setCurrentMenu] = useState<string>('');
@@ -90,7 +91,10 @@ const Sidebar = () => {
                 <div className="bg-white dark:bg-black h-full">
                     <div className="flex justify-between items-center px-4 ">
                         <NavLink to="/" className="main-logo flex items-center shrink-0">
-                            <img className="w-48 mx-auto p-3" src="../../../public/s&S.png" alt="logo" />
+                            <img className="w-48 mx-auto p-3" src="../../../public/s&S.png" alt="logo" onError={(e) => {
+                                e.currentTarget.onerror = null; 
+                                e.currentTarget.src = logo; 
+                            }} />
                         </NavLink>
                         <button
                             type="button"
@@ -302,7 +306,7 @@ const Sidebar = () => {
                                             <li>
                                                 <NavLink to="/otherexpences">{t('Other Expences')}</NavLink>
                                             </li>
-                                            
+
                                             <li>
                                                 <NavLink to="/dieselexpences">{t('Diesel Expence')}</NavLink>
                                             </li>
