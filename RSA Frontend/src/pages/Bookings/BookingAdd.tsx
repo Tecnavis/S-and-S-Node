@@ -722,7 +722,7 @@ const BookingAdd: React.FC = () => {
             return
         }
         if (!selectedEntity || !selectedServiceType || totalDriverDistence === null) {
-            console.error('Missing data for calculation');
+            console.error('Missing data for calculation',selectedEntity ,selectedServiceType ,totalDriverDistence );
             return;
         }
 
@@ -1111,12 +1111,6 @@ const BookingAdd: React.FC = () => {
             baselocationRef.current?.focus();
         }
 
-        // Showroom validation
-        if (!selectedShowroom) {
-            formErrors.selectedShowroom = 'Showroom is required';
-            selectedShowroomRef.current?.focus();
-        }
-
         // Total distance validation
         if (!totalDistance) {
             formErrors.totalDistance = 'Total distance is required';
@@ -1147,11 +1141,6 @@ const BookingAdd: React.FC = () => {
                 selectedEndityRef.current?.focus();
 
             }
-            if (!serviceCategory && !isLifting) {
-                formErrors.serviceCategory = 'Service category is required';
-                serviceCategoryRef.current?.focus();
-
-            }
             if (!totalAmount) {
                 formErrors.totalAmount = 'Total amount is required';
                 totalAmountRef.current?.focus();
@@ -1160,17 +1149,6 @@ const BookingAdd: React.FC = () => {
                 formErrors.totalDriverDistence = 'Total driver distance is required';
                 totalDriverDistenceRef.current?.focus();
 
-            }
-
-            // Accident option validation (nested)
-            if (serviceCategory === 'accident') {
-                if (!accidentOption) {
-                    formErrors.accidentOption = 'Accident option is required';
-                    accidentOptionRef.current?.focus();
-                } else if (accidentOption === 'both' && !insuranceAmount) {
-                    formErrors.insuranceAmount = 'Insurance amount is required for both options';
-                    accidentOptionRef.current?.focus();
-                }
             }
         }
 
@@ -1195,7 +1173,8 @@ const BookingAdd: React.FC = () => {
         // Set errors in the state
         setErrors(formErrors);
 
-        console.log(formErrors)
+        console.log(formErrors,formErrors.selectedVehicleType)
+        Object.keys(formErrors).length === 0 ? null : setLoading(false);
         return Object.keys(formErrors).length === 0;
     };
     // ref to scrolling 

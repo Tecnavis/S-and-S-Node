@@ -275,11 +275,6 @@ const Sidebar = () => {
                                             <li>
                                                 <NavLink to="/dcpreport">{t('Driver/Company/Provider Report')}</NavLink>
                                             </li>
-                                            {![ROLES.VERIFIER, ROLES.CASHIER].includes(role) && (
-                                                <li>
-                                                    <NavLink to="/showroomreport">{t('ShowRoom Report')}</NavLink>
-                                                </li>
-                                            )}
                                             <li>
                                                 <NavLink to="/staffreport">{t('Staff Report')}</NavLink>
                                             </li>
