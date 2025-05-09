@@ -340,7 +340,6 @@ exports.getOrderCompletedBookings = async (req, res) => {
         const total = await Booking.countDocuments(query);
         const bookings = await Booking.find(query)
             .populate('baselocation')
-            .populate('showroom')
             .populate('serviceType')
             .populate('company')
             .populate('driver')
@@ -476,7 +475,6 @@ exports.getAllBookings = async (req, res) => {
         const total = await Booking.countDocuments(query);
         const bookings = await Booking.find(query)
             .populate('baselocation')
-            .populate('showroom')
             .populate('serviceType')
             .populate('company')
             .populate('driver')
@@ -542,7 +540,6 @@ exports.getBookingById = async (req, res) => {
     try {
         const booking = await Booking.findById(id)
             .populate('baselocation') // Populate related documents
-            .populate('showroom')
             .populate('serviceType')
             .populate('company')
             .populate('driver')
@@ -649,7 +646,6 @@ exports.updateBooking = async (req, res) => {
 
         const updatedBooking = await Booking.findByIdAndUpdate(id, updatedData, { new: true })
             .populate('baselocation') // Populate related documents
-            .populate('showroom')
             .populate('serviceType')
             .populate('company')
             .populate('driver')
