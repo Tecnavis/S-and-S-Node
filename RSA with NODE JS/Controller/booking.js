@@ -1162,7 +1162,6 @@ exports.getApprovedBookings = async (req, res) => {
         const total = await Booking.countDocuments(query);
         const bookings = await Booking.find(query)
             .populate('baselocation')
-            .populate('showroom')
             .populate('serviceType')
             .populate('company')
             .populate('driver')
@@ -1253,7 +1252,6 @@ exports.getAllBookingsBasedOnStatus = async (req, res) => {
 
         const bookings = await Booking.find(query)
             .populate('baselocation')
-            .populate('showroom')
             .populate('serviceType')
             .populate('company')
             .populate('driver')
