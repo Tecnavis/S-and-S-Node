@@ -29,11 +29,16 @@ var attendanceRouter = require('./routes/attendance')
 var pmnrRouter = require('./routes/pmnrReport')
 var expenseRouter = require('./routes/expense')
 var dieselExpensesRouter = require('./routes/dieselExpense')
+var setupAgendaJobs = require('./config/Agenda.config')
 
 const cors = require('cors')
 const { app, server } = require('./config/socket.js');
 
 connectDB()
+
+setupAgendaJobs().then(() => {
+  console.log("Job Scheduler connected.");
+}).catch(console.error);
 
 app.use(cors({
   origin: '*',

@@ -14,7 +14,8 @@ import IconPlus from '../../components/Icon/IconPlus';
 import { Booking } from './Bookings';
 import { getDistance } from '../../services/olaMapApi';
 import { DUMMY_SHOWROOM } from './constant';
-
+import Flatpickr from 'react-flatpickr';
+import 'flatpickr/dist/themes/material_blue.css';
 export interface Company {
     _id: string;
     name: string;
@@ -722,7 +723,7 @@ const BookingAdd: React.FC = () => {
             return
         }
         if (!selectedEntity || !selectedServiceType || totalDriverDistence === null) {
-            console.error('Missing data for calculation',selectedEntity ,selectedServiceType ,totalDriverDistence );
+            console.error('Missing data for calculation', selectedEntity, selectedServiceType, totalDriverDistence);
             return;
         }
 
@@ -1173,7 +1174,7 @@ const BookingAdd: React.FC = () => {
         // Set errors in the state
         setErrors(formErrors);
 
-        console.log(formErrors,formErrors.selectedVehicleType)
+        console.log(formErrors, formErrors.selectedVehicleType)
         Object.keys(formErrors).length === 0 ? null : setLoading(false);
         return Object.keys(formErrors).length === 0;
     };
@@ -1214,7 +1215,13 @@ const BookingAdd: React.FC = () => {
                             <label htmlFor="pickupDate">
                                 Pickup Date <span style={{ color: 'red' }}>(optional)</span>
                             </label>
-                            <input id="date-time" min={today} type="datetime-local" className="form-input" value={pickupDate ? new Date(pickupDate).toISOString().slice(0, 16) : ''} onChange={(e) => setPickupDate(e.target.value)} />{' '}
+                            <Flatpickr
+                                id="date-time"
+                                options={{ enableTime: true, dateFormat: "Y-m-d\\TH:i" }}
+                                value={pickupDate}
+                                onChange={([date]) => setPickupDate("" + date)}
+                                className="form-input"
+                            />
                         </div>
                         {/* selcect company if the work type is RSAWork  */}
                         {workType === 'RSAWork' && (
